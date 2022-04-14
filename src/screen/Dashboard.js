@@ -150,9 +150,8 @@ export default function Dashboard(props) {
                         "Coming Soon",
                         "Drop Linelist",
                     ].map((title, index) => (
-                        <Tooltip title={title} placement="right">
+                        <Tooltip key={index} title={title} placement="right">
                             <ListItemButton
-                                key={index}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? "initial" : "center",

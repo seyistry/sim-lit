@@ -1,6 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "boxicons/css/boxicons.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import React from "react";
 import "./index.css";
 import App from "./App";

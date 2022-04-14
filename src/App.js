@@ -1,27 +1,23 @@
 import React, { useState } from "react";
-import Papa from "papaparse";
 import "./App.css";
-import Home from "./screen/Home/Home";
-import Dashboard from "./screen/Dashboard/Dashboard";
+import Home from "./screen/Home";
+import Dashboard from "./screen/Dashboard";
 
 function App() {
     const [upload, setUpload] = useState("");
-
-    const handleFiles = (event) => {
-        event.preventDefault();
-        const value = event.target.files[0];
-        Papa.parse(value, {
-            header: true,
-            complete: function (result) {
-                console.log(result);
-                setUpload(result);
-            },
-        });
-    };
+    const [fileTitle, setFileTitle] = useState("");
     return upload ? (
-        <Dashboard setUpload={setUpload} />
+        <Dashboard
+            setUpload={setUpload}
+            upload={upload}
+            fileTitle={fileTitle}
+        />
     ) : (
-        <Home handleFiles={handleFiles} />
+        <Home
+            setUpload={setUpload}
+            upload={upload}
+            setFileTitle={setFileTitle}
+        />
     );
 }
 

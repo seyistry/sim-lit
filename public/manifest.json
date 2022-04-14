@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SimLit",
+  "name": "A simple Analysis tool for Apin DEA",
   "icons": [
     {
       "src": "favicon.ico",

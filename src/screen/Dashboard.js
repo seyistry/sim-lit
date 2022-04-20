@@ -18,7 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import HourglassTopIcon from "@mui/icons-material/HourglassTop";
+import RowingIcon from '@mui/icons-material/Rowing';
 import Monitoring from "../components/MonitoringTab/Monitoring";
 import Report from "../components/ReportTab/Report";
 import Tooltip from "@mui/material/Tooltip";
@@ -132,7 +132,7 @@ export default function Dashboard(props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Drawer variant="permanent" open={open}>
+            <Drawer variant="permanent"  open={open}>
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === "rtl" ? (
@@ -168,6 +168,13 @@ export default function Dashboard(props) {
                                         minWidth: 0,
                                         mr: open ? 3 : "auto",
                                         justifyContent: "center",
+                                        color:
+                                            activeLink === title
+                                                ? "primary.main"
+                                                : "",
+                                        "&:hover": {
+                                            color: "primary.main",
+                                        },
                                     }}
                                 >
                                     {title === "Monitoring" ? (
@@ -181,19 +188,29 @@ export default function Dashboard(props) {
                                         ""
                                     )}
                                     {title === "Coming Soon" ? (
-                                        <HourglassTopIcon />
+                                        <RowingIcon />
                                     ) : (
                                         ""
                                     )}
                                     {title === "Drop Linelist" ? (
-                                        <DeleteForeverIcon />
+                                        <DeleteForeverIcon sx={{color: "error.main"}}/>
                                     ) : (
                                         ""
                                     )}
                                 </ListItemIcon>
                                 <ListItemText
                                     primary={title}
-                                    sx={{ opacity: open ? 1 : 0 }}
+                                    sx={{
+                                        opacity: open ? 1 : 0,
+                                    }}
+                                    primaryTypographyProps={{
+                                        color:
+                                            activeLink === title
+                                                ? "primary.main"
+                                                : "",
+                                        fontWeight:
+                                            activeLink === title ? "bold" : "",
+                                    }}
                                 />
                             </ListItemButton>
                         </Tooltip>
@@ -206,6 +223,7 @@ export default function Dashboard(props) {
                     flexGrow: 1,
                     p: 3,
                     display: activeLink === "Monitoring" ? "block" : "none",
+                    backgroundColor: "#eff1fe"
                 }}
             >
                 <DrawerHeader />

@@ -7,9 +7,17 @@ export const activePatients = (store) => {
     return info;
 };
 
-export const eligiblePatients = (store) => {
+export const LTFUPatients = (store) => {
+    const info = store.filter(
+        (list) =>
+            list.CurrentARTStatus_Pharmacy === "LTFU" && list.Outcomes === ""
+    );
+    return info;
+};
+
+export const eligiblePatients = (store, date) => {
     const info = store.filter((list) => {
-        const daysOnART = moment("12/04/2022", "DD/MM/YYYY", true).diff(
+        const daysOnART = moment(date, "DD/MM/YYYY", true).diff(
             moment(list.ARTStartDate, "DD/MM/YYYY", true),
             "day"
         );
@@ -19,9 +27,9 @@ export const eligiblePatients = (store) => {
     return info;
 };
 
-export const viralLoadDocumented = (store) => {
+export const viralLoadDocumented = (store, date) => {
     const info = store.filter((list) => {
-        const ReffDate = moment("12/04/2022", "DD/MM/YYYY", true).subtract(
+        const ReffDate = moment(date, "DD/MM/YYYY", true).subtract(
             365,
             "day"
         );
@@ -34,7 +42,8 @@ export const viralLoadDocumented = (store) => {
     });
     return info;
 };
-export const missedAppointment = (store) => {
+
+export const missedAppointment = (store, date) => {
     const info = store.filter((list) => {
         const nextAppointmentDate = moment(
             list.LastPickupDateCal,
@@ -42,12 +51,23 @@ export const missedAppointment = (store) => {
             true
         ).add(parseInt(list.DaysOfARVRefill), "day");
 
-        const DateofCurrentViralLoad = moment(
-            list.DateofCurrentViralLoad,
-            "DD/MM/YYYY",
-            true
+        const ReffDateStart = moment(date, "DD/MM/YYYY", true).subtract(
+            28,
+            "day"
         );
-        if (nextAppointmentDate <= DateofCurrentViralLoad) return list;
+        const ReffDateEnd = moment(date, "DD/MM/YYYY", true);
+        if (
+            nextAppointmentDate >= ReffDateStart &&
+            nextAppointmentDate <= ReffDateEnd
+        )
+            return list;
+    });
+    return info;
+};
+
+export const suppressedVL = (store) => {
+    const info = store.filter((list) => {
+        if (parseInt(list.CurrentViralLoad) < 1000) return list;
     });
     return info;
 };

@@ -13,7 +13,7 @@ function SummaryCard(props) {
             variant="outlined"
             sx={{
                 width: "100%",
-                height: 70,
+                height: 65,
             }}
         >
             <Stack

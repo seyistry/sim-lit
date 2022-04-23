@@ -19,7 +19,7 @@ export default function Monitoring(props) {
     const active = activePatients(props.upload);
     const LTFU = LTFUPatients(props.upload);
     const artDateData = ARTStartDateCollections(props.upload);
-    const missAppintement = missedAppointment(props.upload, reffDate);
+    const missAppintment = missedAppointment(props.upload, reffDate);
     const eligible = eligiblePatients(active, reffDate);
     const documented = viralLoadDocumented(eligible, reffDate);
     const suppressed = suppressedVL(documented);
@@ -52,7 +52,7 @@ export default function Monitoring(props) {
                             <PieChart
                                 active={active.length}
                                 LTFU={LTFU.length}
-                                missAppintement={missAppintement.length}
+                                missAppintment={missAppintment.length}
                             />
                         </Box>
                     </Card>
@@ -62,7 +62,7 @@ export default function Monitoring(props) {
                         <SummaryCard value={active.length} title="active" />
                         <SummaryCard value={LTFU.length} title="LTFU" />
                         <SummaryCard
-                            value={missAppintement.length}
+                            value={missAppintment.length}
                             title="Missed Appointment"
                         />
                         <SummaryCard

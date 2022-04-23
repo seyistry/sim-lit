@@ -124,7 +124,7 @@ export default function Dashboard(props) {
                         Dashboard
                     </Typography>
                     <ChevronRightIcon
-                        fontSize="large"
+                        fontSize="medium"
                         style={{ marginBottom: 3 }}
                     />
                     <Typography variant="h6" noWrap component="div">

@@ -18,7 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import RowingIcon from '@mui/icons-material/Rowing';
+import RowingIcon from "@mui/icons-material/Rowing";
 import Monitoring from "../components/MonitoringTab/Monitoring";
 import Report from "../components/ReportTab/Report";
 import Tooltip from "@mui/material/Tooltip";
@@ -132,7 +132,7 @@ export default function Dashboard(props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <Drawer variant="permanent"  open={open}>
+            <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === "rtl" ? (
@@ -193,7 +193,9 @@ export default function Dashboard(props) {
                                         ""
                                     )}
                                     {title === "Drop Linelist" ? (
-                                        <DeleteForeverIcon sx={{color: "error.main"}}/>
+                                        <DeleteForeverIcon
+                                            sx={{ color: "error.main" }}
+                                        />
                                     ) : (
                                         ""
                                     )}
@@ -223,7 +225,7 @@ export default function Dashboard(props) {
                     flexGrow: 1,
                     p: 3,
                     display: activeLink === "Monitoring" ? "block" : "none",
-                    backgroundColor: "#eff1fe"
+                    backgroundColor: "#eff1fe",
                 }}
             >
                 <DrawerHeader />
@@ -235,6 +237,7 @@ export default function Dashboard(props) {
                     flexGrow: 1,
                     p: 3,
                     display: activeLink === "Report" ? "block" : "none",
+                    backgroundColor: "#eff1fe",
                 }}
             >
                 <DrawerHeader />

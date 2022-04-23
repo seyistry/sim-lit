@@ -241,7 +241,7 @@ export default function Dashboard(props) {
                 }}
             >
                 <DrawerHeader />
-                <Report />
+                <Report upload={props.upload} />
             </Box>
             <Box
                 component="main"

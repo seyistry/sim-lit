@@ -1,9 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
-import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import {
     activePatients,
     eligiblePatients,
@@ -11,17 +7,18 @@ import {
     missedAppointment,
     LTFUPatients,
     suppressedVL,
+    ARTStartDateCollections,
 } from "../../utils/helper";
 import { Stack, Grid, Box, Card, Typography } from "@mui/material";
 import PieChart from "../charts/PieChart";
 import SummaryCard from "./SummaryCard";
+import DailyARTstartChart from "../charts/DailyARTstartChart";
 
 export default function Monitoring(props) {
-    const [reffDate, setReffDate] = useState(moment());
-
+    const reffDate = moment();
     const active = activePatients(props.upload);
     const LTFU = LTFUPatients(props.upload);
-
+    const artDateData = ARTStartDateCollections(props.upload);
     const missAppintement = missedAppointment(props.upload, reffDate);
     const eligible = eligiblePatients(active, reffDate);
     const documented = viralLoadDocumented(eligible, reffDate);
@@ -38,26 +35,26 @@ export default function Monitoring(props) {
                         variant="outlined"
                         sx={{
                             width: "100%",
-                            height: "538.1px",
+                            height: "504px",
                         }}
                     >
                         <Typography
                             variant="h6"
                             fontWeight="bold"
-                            align="center"
                             sx={{
-                                position: "absolute",
                                 paddingTop: 2,
                                 paddingLeft: 3,
                             }}
                         >
                             Facility Performance
                         </Typography>
-                        <PieChart
-                            active={active.length}
-                            LTFU={LTFU.length}
-                            missAppintement={missAppintement.length}
-                        />
+                        <Box sx={{ height: "450.1px" }}>
+                            <PieChart
+                                active={active.length}
+                                LTFU={LTFU.length}
+                                missAppintement={missAppintement.length}
+                            />
+                        </Box>
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={3} sm={12}>
@@ -89,22 +86,31 @@ export default function Monitoring(props) {
             </Grid>
             <Box
                 mt={3}
-                p={2}
                 sx={{
                     backgroundColor: "#fff",
                 }}
             >
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker
-                        label="Select reference date"
-                        value={reffDate}
-                        inputFormat="dd/MM/yyyy"
-                        onChange={(newValue) => {
-                            setReffDate(newValue);
+                <Card
+                    variant="outlined"
+                    sx={{
+                        width: "100%",
+                        height: "538.1px",
+                    }}
+                >
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            paddingTop: 2,
+                            paddingLeft: 3,
                         }}
-                        renderInput={(params) => <TextField {...params} />}
-                    />
-                </LocalizationProvider>
+                        fontWeight="bold"
+                    >
+                        Daily Tx_New Indicator
+                    </Typography>
+                    <Box sx={{ height: "480.1px" }}>
+                        <DailyARTstartChart artDateData={artDateData} />
+                    </Box>
+                </Card>
             </Box>
         </Box>
     );

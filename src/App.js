@@ -5,14 +5,14 @@ import Home from "./screen/Home";
 import Dashboard from "./screen/Dashboard";
 
 const theme = createTheme({
-    typography: {
-        fontFamily: [
-            "Roboto",
-            '"Helvetica Neue"',
-            "Arial",
-            "sans-serif",
-        ].join(","),
-    },
+    // typography: {
+    //     fontFamily: [
+    //         "Roboto",
+    //         '"Helvetica Neue"',
+    //         "Arial",
+    //         "sans-serif",
+    //     ].join(","),
+    // },
 });
 
 function App() {

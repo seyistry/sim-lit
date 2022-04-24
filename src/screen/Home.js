@@ -3,6 +3,9 @@ import { Button, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 import { useCSVReader, formatFileSize } from "react-papaparse";
+import { blue } from "@mui/material/colors";
+
+const bgColor = blue[50];
 
 export default function Home(props) {
     const { CSVReader } = useCSVReader();
@@ -29,6 +32,7 @@ export default function Home(props) {
                     alignItems="center"
                     justifyContent="center"
                     height="100vh"
+                    backgroundColor={bgColor}
                 >
                     <Stack
                         direction="row"
@@ -38,6 +42,7 @@ export default function Home(props) {
                             width: 540,
                             height: 240,
                             boxShadow: 1,
+                            backgroundColor: "#FFF"
                         }}
                     >
                         <Box

@@ -23,6 +23,7 @@ import Monitoring from "../components/MonitoringTab/Monitoring";
 import Report from "../components/ReportTab/Report";
 import Tooltip from "@mui/material/Tooltip";
 import { blue } from "@mui/material/colors";
+import { Stack } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -146,81 +147,145 @@ export default function Dashboard(props) {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                <List>
-                    {[
-                        "Monitoring",
-                        "Report",
-                        "Coming Soon",
-                        "Drop Linelist",
-                    ].map((title, index) => (
-                        <Tooltip key={index} title={title} placement="right">
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? "initial" : "center",
-                                    px: 2.5,
-                                }}
-                                onClick={() =>
-                                    title === "Drop Linelist"
-                                        ? props.setUpload("")
-                                        : setActiveLink(title)
-                                }
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : "auto",
-                                        justifyContent: "center",
-                                        color:
-                                            activeLink === title
-                                                ? "primary.main"
-                                                : "",
-                                        "&:hover": {
-                                            color: "primary.main",
-                                        },
-                                    }}
+                <Stack sx={{ height: "100%", justifyContent: "space-between" }}>
+                    <List>
+                        {["Monitoring", "Report", "Coming Soon"].map(
+                            (title, index) => (
+                                <Tooltip
+                                    key={index}
+                                    title={title}
+                                    placement="right"
                                 >
-                                    {title === "Monitoring" ? (
-                                        <BarChartIcon />
-                                    ) : (
-                                        ""
-                                    )}
-                                    {title === "Report" ? (
-                                        <FeedOutlinedIcon />
-                                    ) : (
-                                        ""
-                                    )}
-                                    {title === "Coming Soon" ? (
-                                        <RowingIcon />
-                                    ) : (
-                                        ""
-                                    )}
-                                    {title === "Drop Linelist" ? (
-                                        <DeleteForeverIcon
-                                            sx={{ color: "error.main" }}
+                                    <ListItemButton
+                                        sx={{
+                                            minHeight: 48,
+                                            justifyContent: open
+                                                ? "initial"
+                                                : "center",
+                                            px: 2.5,
+                                        }}
+                                        onClick={() => setActiveLink(title)}
+                                    >
+                                        <ListItemIcon
+                                            sx={{
+                                                minWidth: 0,
+                                                mr: open ? 3 : "auto",
+                                                justifyContent: "center",
+                                                color:
+                                                    activeLink === title
+                                                        ? "primary.main"
+                                                        : "",
+                                                "&:hover": {
+                                                    color: "primary.main",
+                                                },
+                                            }}
+                                        >
+                                            {title === "Monitoring" ? (
+                                                <BarChartIcon />
+                                            ) : (
+                                                ""
+                                            )}
+                                            {title === "Report" ? (
+                                                <FeedOutlinedIcon />
+                                            ) : (
+                                                ""
+                                            )}
+                                            {title === "Coming Soon" ? (
+                                                <RowingIcon />
+                                            ) : (
+                                                ""
+                                            )}
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={title}
+                                            sx={{
+                                                opacity: open ? 1 : 0,
+                                            }}
+                                            primaryTypographyProps={{
+                                                color:
+                                                    activeLink === title
+                                                        ? "primary.main"
+                                                        : "",
+                                                fontWeight:
+                                                    activeLink === title
+                                                        ? "bold"
+                                                        : "",
+                                            }}
                                         />
-                                    ) : (
-                                        ""
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={title}
+                                    </ListItemButton>
+                                </Tooltip>
+                            )
+                        )}
+                    </List>
+                    <List>
+                        {["Drop Linelist"].map((title, index) => (
+                            <Tooltip
+                                key={index}
+                                title={title}
+                                placement="right"
+                            >
+                                <ListItemButton
                                     sx={{
-                                        opacity: open ? 1 : 0,
+                                        minHeight: 48,
+                                        justifyContent: open
+                                            ? "initial"
+                                            : "center",
+                                        px: 2.5,
                                     }}
-                                    primaryTypographyProps={{
-                                        color:
-                                            activeLink === title
-                                                ? "primary.main"
-                                                : "",
-                                        fontWeight:
-                                            activeLink === title ? "bold" : "",
-                                    }}
-                                />
-                            </ListItemButton>
-                        </Tooltip>
-                    ))}
-                </List>
+                                    onClick={() =>
+                                        title === "Drop Linelist"
+                                            ? props.setUpload("")
+                                            : setActiveLink(title)
+                                    }
+                                >
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : "auto",
+                                            justifyContent: "center",
+                                            color:
+                                                activeLink === title
+                                                    ? "primary.main"
+                                                    : "",
+                                            "&:hover": {
+                                                color: "primary.main",
+                                            },
+                                        }}
+                                    >
+                                        {title === "Coming Soon" ? (
+                                            <RowingIcon />
+                                        ) : (
+                                            ""
+                                        )}
+                                        {title === "Drop Linelist" ? (
+                                            <DeleteForeverIcon
+                                                sx={{ color: "error.main" }}
+                                            />
+                                        ) : (
+                                            ""
+                                        )}
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={title}
+                                        sx={{
+                                            opacity: open ? 1 : 0,
+                                        }}
+                                        primaryTypographyProps={{
+                                            color:
+                                                activeLink === title
+                                                    ? "primary.main"
+                                                    : "",
+                                            fontWeight:
+                                                activeLink === title
+                                                    ? "bold"
+                                                    : "",
+                                        }}
+                                    />
+                                </ListItemButton>
+                            </Tooltip>
+                        ))}
+                    </List>
+                </Stack>
             </Drawer>
             <Box
                 component="main"

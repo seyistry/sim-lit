@@ -41,7 +41,7 @@ function SummaryCard(props) {
                 </Stack>
                 <Stack px={3}>
                     <AssignmentIndIcon
-                        fontSize="medium"
+                        fontSize="small"
                         sx={{
                             display:
                                 props.title === "active" ? "block" : "none",
@@ -49,14 +49,14 @@ function SummaryCard(props) {
                         }}
                     />
                     <NoAccountsIcon
-                        fontSize="medium"
+                        fontSize="small"
                         sx={{
                             display: props.title === "LTFU" ? "block" : "none",
                             color: "error.main",
                         }}
                     />
                     <HourglassTopIcon
-                        fontSize="medium"
+                        fontSize="small"
                         sx={{
                             display:
                                 props.title === "Missed Appointment"
@@ -66,7 +66,7 @@ function SummaryCard(props) {
                         }}
                     />
                     <SettingsAccessibilityIcon
-                        fontSize="medium"
+                        fontSize="small"
                         sx={{
                             display:
                                 props.title === "viral load eligibility"
@@ -76,7 +76,7 @@ function SummaryCard(props) {
                         }}
                     />
                     <SettingsAccessibilityIcon
-                        fontSize="medium"
+                        fontSize="small"
                         sx={{
                             display:
                                 props.title === "viral Load Documented"
@@ -86,7 +86,7 @@ function SummaryCard(props) {
                         }}
                     />
                     <SentimentVerySatisfiedIcon
-                        fontSize="medium"
+                        fontSize="small"
                         sx={{
                             display:
                                 (props.title === "V.L coverage" ||
@@ -98,7 +98,7 @@ function SummaryCard(props) {
                         }}
                     />
                     <SentimentVeryDissatisfiedIcon
-                        fontSize="medium"
+                        fontSize="small"
                         sx={{
                             display:
                                 (props.title === "V.L coverage" ||

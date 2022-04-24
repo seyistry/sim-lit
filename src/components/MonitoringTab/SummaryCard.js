@@ -12,7 +12,7 @@ function SummaryCard(props) {
         <Card
             variant="outlined"
             sx={{
-                width: "100%",
+                width: { xs: "100%", sm: "100%", md: "100%", lg: 300 },
                 height: 65,
             }}
         >

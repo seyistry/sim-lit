@@ -85,7 +85,7 @@ export default function Monitoring(props) {
                 </Grid>
             </Grid>
             <Box
-                mt={3}
+                mt={2}
                 sx={{
                     backgroundColor: "#fff",
                 }}
@@ -94,7 +94,7 @@ export default function Monitoring(props) {
                     variant="outlined"
                     sx={{
                         width: "100%",
-                        height: "538.1px",
+                        height: "490.1px",
                     }}
                 >
                     <Typography
@@ -107,7 +107,7 @@ export default function Monitoring(props) {
                     >
                         Daily Tx_New Indicator
                     </Typography>
-                    <Box sx={{ height: "480.1px" }}>
+                    <Box sx={{ height: "420.1px" }}>
                         <DailyARTstartChart artDateData={artDateData} />
                     </Box>
                 </Card>

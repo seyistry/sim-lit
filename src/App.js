@@ -5,13 +5,18 @@ import Home from "./screen/Home";
 import Dashboard from "./screen/Dashboard";
 
 const theme = createTheme({
-    // typography: {
-    //     fontFamily: [
-    //         "Roboto",
-    //         '"Helvetica Neue"',
-    //         "Arial",
-    //         "sans-serif",
-    //     ].join(","),
+    typography: {
+        fontFamily: [
+            "Inter",
+            "Roboto",
+            '"Helvetica Neue"',
+            "Arial",
+            "sans-serif",
+        ].join(","),
+    },
+    // To add dark mode
+    // palette: {
+    //     mode: "dark",
     // },
 });
 

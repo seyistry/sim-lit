@@ -66,7 +66,11 @@ export const viralLoadDocumented = (store, date) => {
     return info;
 };
 
-export const missedAppointment = (store, date) => {
+export const missedAppointment = (
+    store,
+    date,
+    startDate = moment(date, "DD/MM/YYYY", true).subtract(28, "day")
+) => {
     const info = store.filter((list) => {
         const nextAppointmentDate = moment(
             list.LastPickupDateCal,
@@ -83,7 +87,7 @@ export const missedAppointment = (store, date) => {
             nextAppointmentDate >= ReffDateStart &&
             nextAppointmentDate <= ReffDateEnd
         )
-            return list;
+            if (nextAppointmentDate >= startDate) return list;
     });
     return info;
 };

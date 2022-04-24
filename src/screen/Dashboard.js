@@ -22,8 +22,11 @@ import RowingIcon from "@mui/icons-material/Rowing";
 import Monitoring from "../components/MonitoringTab/Monitoring";
 import Report from "../components/ReportTab/Report";
 import Tooltip from "@mui/material/Tooltip";
+import { blue } from "@mui/material/colors";
 
 const drawerWidth = 240;
+
+const bgColor = blue[50];
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -225,7 +228,7 @@ export default function Dashboard(props) {
                     flexGrow: 1,
                     p: 3,
                     display: activeLink === "Monitoring" ? "block" : "none",
-                    backgroundColor: "#eff1fe",
+                    backgroundColor: bgColor,
                 }}
             >
                 <DrawerHeader />
@@ -237,7 +240,7 @@ export default function Dashboard(props) {
                     flexGrow: 1,
                     p: 3,
                     display: activeLink === "Report" ? "block" : "none",
-                    backgroundColor: "#eff1fe",
+                    backgroundColor: bgColor,
                 }}
             >
                 <DrawerHeader />

@@ -15,7 +15,7 @@ const PieChart = (props) => {
         {
             id: "Missed Appointment",
             label: "Missed Appointment",
-            value: props.missAppintement,
+            value: props.missAppintment,
         },
     ];
     return (

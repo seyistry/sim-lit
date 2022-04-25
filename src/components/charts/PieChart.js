@@ -63,6 +63,20 @@ const PieChart = (props) => {
                     id: "lines",
                 },
             ]}
+            theme={{
+                tooltip: {
+                    container: {
+                        background: theme.palette.background.default,
+                        color: theme.palette.text.primary,
+                        fontSize: 12,
+                    },
+                    basic: {},
+                    chip: {},
+                    table: {},
+                    tableCell: {},
+                    tableCellValue: {},
+                },
+            }}
             legends={[
                 {
                     anchor: "bottom",

@@ -70,11 +70,6 @@ const PieChart = (props) => {
                         color: theme.palette.text.primary,
                         fontSize: 12,
                     },
-                    basic: {},
-                    chip: {},
-                    table: {},
-                    tableCell: {},
-                    tableCellValue: {},
                 },
             }}
             legends={[

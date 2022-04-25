@@ -1,6 +1,8 @@
 import { ResponsivePie } from "@nivo/pie";
+import { useTheme } from "@mui/system";
 
 const PieChart = (props) => {
+    const theme = useTheme();
     const data = [
         {
             id: "Active",
@@ -34,7 +36,7 @@ const PieChart = (props) => {
                 modifiers: [["darker", 1.2]],
             }}
             arcLinkLabelsSkipAngle={10}
-            arcLinkLabelsTextColor="#333333"
+            arcLinkLabelsTextColor={theme.palette.text.primary}
             arcLinkLabelsThickness={2}
             arcLinkLabelsColor={{ from: "color" }}
             arcLabelsSkipAngle={10}
@@ -71,7 +73,7 @@ const PieChart = (props) => {
                     itemsSpacing: 0,
                     itemWidth: 100,
                     itemHeight: 18,
-                    itemTextColor: "#999",
+                    itemTextColor: theme.palette.text.secondary,
                     itemDirection: "left-to-right",
                     itemOpacity: 1,
                     symbolSize: 18,
@@ -80,7 +82,7 @@ const PieChart = (props) => {
                         {
                             on: "hover",
                             style: {
-                                itemTextColor: "#000",
+                                itemTextColor: theme.palette.text.primary,
                             },
                         },
                     ],

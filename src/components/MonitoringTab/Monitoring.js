@@ -12,6 +12,7 @@ import {
 import { Stack, Grid, Box, Card, Typography } from "@mui/material";
 import PieChart from "../charts/PieChart";
 import SummaryCard from "./SummaryCard";
+import SummaryTable from "./SummaryTable";
 import DailyARTstartChart from "../charts/DailyARTstartChart";
 
 export default function Monitoring(props) {
@@ -59,6 +60,10 @@ export default function Monitoring(props) {
                 </Grid>
                 <Grid item xs={12} md={3} sm={12}>
                     <Stack spacing={1}>
+                        {/* <SummaryTable
+                            Tx_Current="Tx_Current"
+                            Tx_CurrentValue={active.length}
+                        /> */}
                         <SummaryCard value={active.length} title="active" />
                         <SummaryCard value={LTFU.length} title="LTFU" />
                         <SummaryCard

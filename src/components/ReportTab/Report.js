@@ -1,23 +1,113 @@
-import * as React from "react";
-import TextField from "@mui/material/TextField";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import React, { useState } from "react";
+import moment from "moment";
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Box,
+    Typography,
+} from "@mui/material";
+import { LTFUPatients, missedAppointment } from "../../utils/helper";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ReportCard from "./ReportCard";
 
-export default function Report() {
-    const [value, setValue] = React.useState(null);
+export default function Report(props) {
+    const [startDateIIT, setStartDateIIT] = useState("");
+    const [endDateIIT, setEndDateIIT] = useState(moment());
+
+    const [startDateMA, setStartDateMA] = useState("");
+    const [endDateMA, setEndDateMA] = useState(moment());
+
+    const [expanded, setExpanded] = useState(false);
+
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
+
+    const LTFUdata = LTFUPatients(props.upload);
+    const missedAppointmentData = startDateMA
+        ? missedAppointment(props.upload, endDateMA, startDateMA)
+        : missedAppointment(props.upload, endDateMA);
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-                label="Select reference date"
-                value={value}
-                inputFormat="dd/MM/yyyy"
-                onChange={(newValue) => {
-                    setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-            />
-        </LocalizationProvider>
+        <Box sx={{ flexGrow: 1 }}>
+            <Accordion
+                expanded={expanded === "panel1"}
+                onChange={handleChange("panel1")}
+            >
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
+                    sx={{ borderBottom: "1px solid #eee" }}
+                >
+                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                        Interruption in Treatment
+                    </Typography>
+                    <Typography sx={{ color: "text.secondary" }}>
+                        Generate IIT List
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <ReportCard
+                        title="IIT_"
+                        data={LTFUdata}
+                        setStartDate={setStartDateIIT}
+                        startDate={startDateIIT}
+                        endDate={endDateIIT}
+                        setEndDate={setEndDateIIT}
+                    />
+                </AccordionDetails>
+            </Accordion>
+            <Accordion
+                expanded={expanded === "panel2"}
+                onChange={handleChange("panel2")}
+            >
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2bh-content"
+                    id="panel2bh-header"
+                    sx={{ borderBottom: "1px solid #eee" }}
+                >
+                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                        Missed Appointment
+                    </Typography>
+                    <Typography sx={{ color: "text.secondary" }}>
+                        Generate Missed Appointment List
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <ReportCard
+                        title="MissedAppointment_"
+                        data={missedAppointmentData}
+                        setStartDate={setStartDateMA}
+                        startDate={startDateMA}
+                        endDate={endDateMA}
+                        setEndDate={setEndDateMA}
+                    />
+                </AccordionDetails>
+            </Accordion>
+            <Accordion
+                expanded={expanded === "panel3"}
+                onChange={handleChange("panel3")}
+            >
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel3bh-content"
+                    id="panel3bh-header"
+                    sx={{ borderBottom: "1px solid #eee" }}
+                >
+                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                        Viral Load
+                    </Typography>
+                    <Typography sx={{ color: "text.secondary" }}>
+                        Generate List of Patient due for Viral
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <span>still thinking</span>
+                </AccordionDetails>
+            </Accordion>
+        </Box>
     );
 }

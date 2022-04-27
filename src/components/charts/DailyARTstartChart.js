@@ -4,7 +4,7 @@ import { ResponsiveCalendar } from "@nivo/calendar";
 
 const DailyARTstartChart = (props) => {
     const data = props.artDateData;
-    const indicatorColorOne = blue[100];
+    const indicatorColorOne = blue[900];
 
     const theme = useTheme();
 
@@ -13,7 +13,7 @@ const DailyARTstartChart = (props) => {
             data={data}
             from="2021-03-01"
             to="2022-12-12"
-            emptyColor="#888"
+            emptyColor="#eee"
             theme={{
                 textColor: theme.palette.text.primary,
                 tooltip: {
@@ -25,10 +25,10 @@ const DailyARTstartChart = (props) => {
                 },
             }}
             colors={[
-                indicatorColorOne,
                 theme.palette.primary.light,
                 theme.palette.primary.main,
                 theme.palette.primary.dark,
+                indicatorColorOne,
             ]}
             margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
             yearSpacing={40}

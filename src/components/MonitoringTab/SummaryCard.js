@@ -12,7 +12,8 @@ function SummaryCard(props) {
         <Card
             variant="outlined"
             sx={{
-                width: { xs: "100%", sm: "100%", md: "100%", lg: 300 },
+                // width: { xs: "100%", sm: "100%", md: "100%", lg: 300 },
+                width: "100%",
                 height: 65,
             }}
         >
@@ -33,7 +34,7 @@ function SummaryCard(props) {
                     </Typography>
                     <Typography
                         fontWeight="light"
-                        variant="subtitle2"
+                        variant="caption"
                         sx={{ textTransform: "capitalize" }}
                     >
                         {props.title}

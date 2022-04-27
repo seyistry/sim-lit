@@ -27,28 +27,29 @@ export default function Home(props) {
             }}
         >
             {({ getRootProps, acceptedFile }) => (
-                <Stack
-                    direction="row"
+                <Box
+                    display="flex"
                     alignItems="center"
                     justifyContent="center"
                     height="100vh"
+                    width="100%"
                     backgroundColor={bgColor}
                 >
-                    <Stack
-                        direction="row"
+                    <Box
+                        display="flex"
                         alignItems="center"
                         justifyContent="center"
                         sx={{
-                            width: 540,
-                            height: 240,
+                            width: "65%",
+                            height: "40%",
                             boxShadow: 1,
-                            backgroundColor: "#FFF"
+                            backgroundColor: "#FFF",
                         }}
                     >
                         <Box
                             {...getRootProps()}
                             sx={{
-                                width: 500,
+                                width: "95%",
                                 height: 200,
                             }}
                         >
@@ -116,8 +117,8 @@ export default function Home(props) {
                                 </Stack>
                             )}
                         </Box>
-                    </Stack>
-                </Stack>
+                    </Box>
+                </Box>
             )}
         </CSVReader>
     );

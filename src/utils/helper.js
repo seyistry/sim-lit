@@ -88,7 +88,6 @@ export const PatientDueForViralLoad = (store, date) => {
         )
             return list;
     });
-    console.log(info);
     return info;
 };
 

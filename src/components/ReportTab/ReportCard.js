@@ -13,7 +13,7 @@ function ReportCard(props) {
                 // height: "520px",
             }}
         >
-            {title === "IIT_" ? (
+            {title === "IIT_" || title === "DueForViralLoad_" ? (
                 ""
             ) : (
                 <Stack

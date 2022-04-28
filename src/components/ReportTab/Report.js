@@ -7,7 +7,13 @@ import {
     Box,
     Typography,
 } from "@mui/material";
-import { LTFUPatients, missedAppointment } from "../../utils/helper";
+import {
+    activePatients,
+    eligiblePatients,
+    LTFUPatients,
+    missedAppointment,
+    PatientDueForViralLoad,
+} from "../../utils/helper";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ReportCard from "./ReportCard";
 
@@ -25,6 +31,11 @@ export default function Report(props) {
     };
 
     const LTFUdata = LTFUPatients(props.upload);
+    const reffDate = moment();
+    const active = activePatients(props.upload);
+    const eligible = eligiblePatients(active, reffDate);
+    const dueForViralLoad = PatientDueForViralLoad(eligible, reffDate);
+
     const missedAppointmentData = startDateMA
         ? missedAppointment(props.upload, endDateMA, startDateMA)
         : missedAppointment(props.upload, endDateMA);
@@ -105,7 +116,43 @@ export default function Report(props) {
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <span>still thinking</span>
+                    <ReportCard
+                        title="DueForViralLoad_"
+                        data={dueForViralLoad}
+                        setStartDate={setStartDateIIT}
+                        startDate={startDateIIT}
+                        endDate={endDateIIT}
+                        setEndDate={setEndDateIIT}
+                    />
+                </AccordionDetails>
+            </Accordion>
+            <Accordion
+                expanded={expanded === "panel4"}
+                onChange={handleChange("panel4")}
+            >
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel4bh-content"
+                    id="panel4bh-header"
+                    sx={{ borderBottom: "1px solid #eee" }}
+                >
+                    <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                        Unsuppressed Viral Load
+                    </Typography>
+                    <Typography sx={{ color: "text.secondary" }}>
+                        Generate List of Patient with unsuppressed Viral Load
+                    </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography color="warning.main">In progress</Typography>
+                    {/* <ReportCard
+                        title="unsuppressedViralLoad_"
+                        data={dueForViralLoad}
+                        setStartDate={setStartDateIIT}
+                        startDate={startDateIIT}
+                        endDate={endDateIIT}
+                        setEndDate={setEndDateIIT}
+                    /> */}
                 </AccordionDetails>
             </Accordion>
         </Box>

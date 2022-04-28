@@ -9,57 +9,71 @@ import {
     GridToolbarFilterButton,
 } from "@mui/x-data-grid";
 
-const columns = [
-    { field: "PepID", headerName: "Pep ID", width: 120 },
-    {
-        field: "State",
-        headerName: "State",
-        width: 120,
-        editable: true,
-    },
-    {
-        field: "FacilityName",
-        headerName: "Facility Name",
-        width: 120,
-        editable: true,
-    },
-    {
-        field: "fullName",
-        headerName: "Full name",
-        description: "This column has a value getter and is not sortable.",
-        sortable: false,
-        width: 160,
-        valueGetter: (params) =>
-            `${params.row.Firstname || ""} ${params.row.Surname || ""}`,
-    },
-    {
-        field: "LastPickupDateCal",
-        headerName: "Last Pickup Date",
-        width: 120,
-        editable: true,
-    },
-    {
-        field: "DaysOfARVRefill",
-        headerName: "Days Of ARV Refill",
-        width: 120,
-        editable: true,
-    },
-    {
-        field: "Current_Age",
-        headerName: "Age",
-        type: "number",
-        width: 110,
-        editable: true,
-    },
-    {
-        field: "PhoneNo",
-        headerName: "Phone NUmber",
-        width: 150,
-        editable: true,
-    },
-];
-
 export default function ReportTableForIITandMA(props) {
+    const columns = [
+        { field: "PepID", headerName: "Pep ID", width: 120 },
+        {
+            field: "State",
+            headerName: "State",
+            width: 120,
+            editable: true,
+        },
+        {
+            field: "FacilityName",
+            headerName: "Facility Name",
+            width: 120,
+            editable: true,
+        },
+        {
+            field: "fullName",
+            headerName: "Full name",
+            description: "Firstname Surname",
+            sortable: true,
+            width: 160,
+            valueGetter: (params) =>
+                `${params.row.Firstname || ""} ${params.row.Surname || ""}`,
+        },
+        {
+            field:
+                props.title === "DueForViralLoad_"
+                    ? "DateofCurrentViralLoad"
+                    : "LastPickupDateCal",
+            headerName:
+                props.title === "DueForViralLoad_"
+                    ? "Date of Current Viral Load"
+                    : "Last Pickup Date",
+            width: 120,
+            editable: true,
+            type: 'date',
+        },
+        {
+            field:
+                props.title === "DueForViralLoad_"
+                    ? "LastDateOfSampleCollection"
+                    : "DaysOfARVRefill",
+            headerName:
+                props.title === "DueForViralLoad_"
+                    ? "Last Date Of Sample Collection"
+                    : "Days Of ARV Refill",
+            width: 120,
+            editable: true,
+            type: 'date',
+        },
+        {
+            field: "Current_Age",
+            headerName: "Age",
+            type: "number",
+            width: 110,
+            editable: true,
+        },
+        {
+            field: "PhoneNo",
+            headerName: "Phone NUmber",
+            width: 150,
+            editable: true,
+        },
+    ];
+
     const CustomToolbar = () => {
         return (
             <GridToolbarContainer>
@@ -85,7 +99,7 @@ export default function ReportTableForIITandMA(props) {
                 columns={columns}
                 pageSize={100}
                 getRowId={(row) => row.PepID}
-                columnBuffer={8}
+                columnBuffer={10}
                 rowsPerPageOptions={[100]}
                 checkboxSelection
                 disableSelectionOnClick

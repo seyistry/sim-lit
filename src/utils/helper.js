@@ -66,6 +66,32 @@ export const viralLoadDocumented = (store, date) => {
     return info;
 };
 
+export const PatientDueForViralLoad = (store, date) => {
+    const info = store.filter((list) => {
+        const ReffDate = moment(date, "DD/MM/YYYY", true).subtract(365, "day");
+        const DateofCurrentViralLoad = moment(
+            list.DateofCurrentViralLoad,
+            "DD/MM/YYYY",
+            true
+        );
+        const DateofLastSampleCollection = moment(
+            list.LastDateOfSampleCollection,
+            "DD/MM/YYYY",
+            true
+        );
+
+        const maxSampleDateAllowed = moment().subtract(90, "day");
+
+        if (
+            ReffDate > DateofCurrentViralLoad &&
+            maxSampleDateAllowed >= DateofLastSampleCollection
+        )
+            return list;
+    });
+    console.log(info);
+    return info;
+};
+
 export const missedAppointment = (
     store,
     date,

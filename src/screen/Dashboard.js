@@ -1,33 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+import {
+    IconButton,
+    Divider,
+    Typography,
+    CssBaseline,
+    List,
+    Toolbar,
+    Box,
+    Modal,
+    SpeedDial,
+    SpeedDialAction,
+    SpeedDialIcon,
+    Stack,
+    Tooltip,
+    ListItemIcon,
+    ListItemText,
+    ListItemButton,
+    TextField,
+    Card,
+    Paper,
+    InputBase,
+    Button,
+} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import UploadFileOutlinedIcon from "@mui/icons-material/UploadFileOutlined";
+import SearchIcon from "@mui/icons-material/Search";
+import BackupIcon from "@mui/icons-material/Backup";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import RowingIcon from "@mui/icons-material/Rowing";
 import Monitoring from "../components/MonitoringTab/Monitoring";
 import Report from "../components/ReportTab/Report";
-import Tooltip from "@mui/material/Tooltip";
 import { blue } from "@mui/material/colors";
-import { Stack } from "@mui/material";
+import PatientDetailList from "../components/others/PatientDetailList";
 
 const drawerWidth = 240;
 
 const bgColor = blue[50];
+
+const actions = [
+    { icon: <SearchIcon />, name: "Search for a Patient" },
+    { icon: <UploadFileOutlinedIcon />, name: "Add HTS Linelist" },
+    { icon: <BackupIcon />, name: "Add NDR Linelist" },
+];
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -98,9 +120,30 @@ export default function Dashboard(props) {
     const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [activeLink, setActiveLink] = useState("Monitoring");
+    const valueRef = useRef("");
+    const [openModal, setOpenModal] = React.useState(false);
+    const [search, setSearch] = React.useState(false);
+    const [patientDetails, setPatientDetails] = React.useState("");
+    const handleOpen = () => setOpenModal(true);
+    const handleClose = () => {
+        setOpenModal(false);
+        setSearch(false);
+    };
+    const data = props.upload;
+    // let patientDetails = "";
 
     const handleDrawerOpen = () => {
         setOpen(true);
+    };
+
+    const handleModalInputButton = () => {
+        setPatientDetails(
+            data.find(
+                (record) =>
+                    record.PepID === valueRef.current.value.toLocaleUpperCase()
+            )
+        );
+        setSearch(valueRef.current.value === "" ? false : true);
     };
 
     const handleDrawerClose = () => {
@@ -287,6 +330,175 @@ export default function Dashboard(props) {
                     </List>
                 </Stack>
             </Drawer>
+            <SpeedDial
+                ariaLabel="SpeedDial to upload csv files"
+                sx={{ position: "fixed", bottom: 16, right: 16 }}
+                icon={<SpeedDialIcon />}
+            >
+                {actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={action.icon}
+                        tooltipTitle={action.name}
+                        onClick={
+                            action.name === "Search for a Patient"
+                                ? handleOpen
+                                : ""
+                        }
+                    />
+                ))}
+            </SpeedDial>
+            <Modal
+                open={openModal}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                disableRestoreFocus={true}
+            >
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: 400,
+                        // p: 4,
+                    }}
+                >
+                    <Paper
+                        sx={{
+                            p: "2px 4px",
+                            display: search ? "none" : "flex",
+                            alignItems: "center",
+                            width: 400,
+                        }}
+                    >
+                        <IconButton sx={{ p: "10px" }} aria-label="menu">
+                            <PersonIcon />
+                        </IconButton>
+                        <InputBase
+                            sx={{ ml: 1, flex: 1 }}
+                            placeholder="Search with PepID"
+                            inputProps={{ "aria-label": "Search with PepID" }}
+                            autoFocus={true}
+                            inputRef={valueRef}
+                            onKeyDown={(e) => {
+                                if (e.code === "Enter") {
+                                    e.preventDefault();
+                                    handleModalInputButton();
+                                }
+                            }}
+                        />
+                        <IconButton
+                            onClick={handleModalInputButton}
+                            sx={{ p: "10px" }}
+                            aria-label="search"
+                        >
+                            <SearchIcon />
+                        </IconButton>
+                    </Paper>
+                    <Paper
+                        sx={{
+                            p: "2px 4px",
+                            display: search ? "block" : "none",
+                            alignItems: "center",
+                            width: 400,
+                        }}
+                    >
+                        {patientDetails === undefined ? (
+                            <Typography
+                                variant="subtitle2"
+                                color="error.main"
+                                p={1}
+                            >
+                                No associated patient profile is assigned with
+                                this PepID
+                            </Typography>
+                        ) : (
+                            <>
+                                <PatientDetailList
+                                    title="PepID"
+                                    value={patientDetails.PepID}
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="Fullname"
+                                    value={
+                                        patientDetails.Firstname +
+                                        " " +
+                                        patientDetails.Surname
+                                    }
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="PhoneNo"
+                                    value={patientDetails.PhoneNo}
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="Current Age"
+                                    value={patientDetails.Current_Age}
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="ARTStartDate"
+                                    value={patientDetails.ARTStartDate}
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="CurrentViralLoad"
+                                    value={patientDetails.CurrentViralLoad}
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="DateofCurrentViralLoad"
+                                    value={
+                                        patientDetails.DateofCurrentViralLoad
+                                    }
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="LastPickupDateCal"
+                                    value={patientDetails.LastPickupDateCal}
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="DaysOfARVRefill"
+                                    value={patientDetails.DaysOfARVRefill}
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="EstimatedNextAppointment"
+                                    value={
+                                        patientDetails.EstimatedNextAppointmentPharmacy
+                                    }
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="CurrentARTStatus"
+                                    value={
+                                        patientDetails.CurrentARTStatus_Pharmacy
+                                    }
+                                />
+                                <Divider />
+                                <PatientDetailList
+                                    title="CurrentARTRegimen"
+                                    value={patientDetails.CurrentARTRegimen}
+                                />
+                                <Divider />
+                            </>
+                        )}
+
+                        <Button
+                            variant="text"
+                            p={1}
+                            onClick={() => setSearch(false)}
+                        >
+                            Search Again
+                        </Button>
+                    </Paper>
+                </Box>
+            </Modal>
             <Box
                 component="main"
                 sx={{

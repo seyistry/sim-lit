@@ -1,28 +1,28 @@
 import moment from "moment";
 
 export const ARTStartDateCollections = (store) => {
-    const dateArray = [];
+    const datesCollectionArray = [];
     store.filter((list) => {
-        const dateCo = moment(list.ARTStartDate, "DD/MM/YYYY").format(
+        const dateReceived = moment(list.ARTStartDate, "DD/MM/YYYY").format(
             "YYYY-MM-DD"
         );
-        let found = false;
-        for (var i = 0; i < dateArray.length; i++) {
-            if (dateArray[i].day === dateCo) {
-                found = true;
-                dateArray[i].value = dateArray[i].value + 1;
+        let dateFound = false;
+        for (let i = 0; i < datesCollectionArray.length; i++) {
+            if (datesCollectionArray[i].day === dateReceived) {
+                dateFound = true;
+                datesCollectionArray[i].value = datesCollectionArray[i].value + 1;
                 break;
             }
         }
-        if (!found) {
-            const myObj = {};
-            myObj["day"] = dateCo;
-            myObj["value"] = 1;
-            dateArray.push(myObj);
+        if (!dateFound) {
+            const newDateObj = {};
+            newDateObj["day"] = dateReceived;
+            newDateObj["value"] = 1;
+            datesCollectionArray.push(newDateObj);
         }
         return null;
     });
-    return dateArray;
+    return datesCollectionArray;
 };
 
 export const activePatients = (store) => {

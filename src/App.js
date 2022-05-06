@@ -24,17 +24,17 @@ const theme = createTheme({
 
 function App() {
     const matches = useMediaQuery("(max-width: 550px)");
-    const [upload, setUpload] = useState("");
+    const [artUpload, setArtUpload] = useState("");
     const [fileTitle, setFileTitle] = useState("");
     return (
         <ThemeProvider theme={theme}>
-            {upload ? (
+            {artUpload ? (
                 matches ? (
                     <ChangeOrientations />
                 ) : (
                     <Dashboard
-                        setUpload={setUpload}
-                        upload={upload}
+                        setArtUpload={setArtUpload}
+                        artUpload={artUpload}
                         fileTitle={fileTitle}
                     />
                 )
@@ -42,8 +42,8 @@ function App() {
                 <ChangeOrientations />
             ) : (
                 <Home
-                    setUpload={setUpload}
-                    upload={upload}
+                    setArtUpload={setArtUpload}
+                    // artUpload={artUpload}
                     setFileTitle={setFileTitle}
                 />
             )}

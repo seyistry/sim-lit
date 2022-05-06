@@ -19,8 +19,6 @@ import {
     ListItemIcon,
     ListItemText,
     ListItemButton,
-    TextField,
-    Card,
     Paper,
     InputBase,
     Button,
@@ -129,7 +127,7 @@ export default function Dashboard(props) {
         setOpenModal(false);
         setSearch(false);
     };
-    const data = props.upload;
+    const data = props.artUpload;
     // let patientDetails = "";
 
     const handleDrawerOpen = () => {
@@ -277,7 +275,7 @@ export default function Dashboard(props) {
                                     }}
                                     onClick={() =>
                                         title === "Drop Linelist"
-                                            ? props.setUpload("")
+                                            ? props.setArtUpload("")
                                             : setActiveLink(title)
                                     }
                                 >
@@ -509,7 +507,7 @@ export default function Dashboard(props) {
                 }}
             >
                 <DrawerHeader />
-                <Monitoring upload={props.upload} />
+                <Monitoring artUpload={props.artUpload} />
             </Box>
             <Box
                 component="main"
@@ -521,7 +519,7 @@ export default function Dashboard(props) {
                 }}
             >
                 <DrawerHeader />
-                <Report upload={props.upload} />
+                <Report artUpload={props.artUpload} />
             </Box>
             <Box
                 component="main"

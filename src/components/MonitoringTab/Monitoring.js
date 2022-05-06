@@ -17,10 +17,10 @@ import DailyARTstartChart from "../charts/DailyARTstartChart";
 
 export default function Monitoring(props) {
     const reffDate = moment();
-    const active = activePatients(props.upload);
-    const LTFU = LTFUPatients(props.upload);
-    const artDateData = ARTStartDateCollections(props.upload);
-    const missAppintment = missedAppointment(props.upload, reffDate);
+    const active = activePatients(props.artUpload);
+    const LTFU = LTFUPatients(props.artUpload);
+    const artDateData = ARTStartDateCollections(props.artUpload);
+    const missAppintment = missedAppointment(props.artUpload, reffDate);
     const eligible = eligiblePatients(active, reffDate);
     const documented = viralLoadDocumented(eligible, reffDate);
     const suppressed = suppressedVL(documented);

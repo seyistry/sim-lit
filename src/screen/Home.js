@@ -14,7 +14,7 @@ export default function Home(props) {
         <CSVReader
             config={{ header: true }}
             onUploadAccepted={(results) => {
-                props.setUpload(results.data);
+                props.setArtUpload(results.data);
                 setZoneHover(false);
             }}
             onDragOver={(event) => {

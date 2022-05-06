@@ -30,15 +30,15 @@ export default function Report(props) {
         setExpanded(isExpanded ? panel : false);
     };
 
-    const LTFUdata = LTFUPatients(props.upload);
+    const LTFUdata = LTFUPatients(props.artUpload);
     const reffDate = moment();
-    const active = activePatients(props.upload);
+    const active = activePatients(props.artUpload);
     const eligible = eligiblePatients(active, reffDate);
     const dueForViralLoad = PatientDueForViralLoad(eligible, reffDate);
 
     const missedAppointmentData = startDateMA
-        ? missedAppointment(props.upload, endDateMA, startDateMA)
-        : missedAppointment(props.upload, endDateMA);
+        ? missedAppointment(props.artUpload, endDateMA, startDateMA)
+        : missedAppointment(props.artUpload, endDateMA);
 
     return (
         <Box sx={{ flexGrow: 1 }}>

@@ -12,7 +12,7 @@ import {
 import { Stack, Grid, Box, Card, Typography } from "@mui/material";
 import PieChart from "../charts/PieChart";
 import SummaryCard from "./SummaryCard";
-import SummaryTable from "./SummaryTable";
+// import SummaryTable from "./SummaryTable";
 import DailyARTstartChart from "../charts/DailyARTstartChart";
 
 export default function Monitoring(props) {

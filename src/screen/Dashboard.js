@@ -457,7 +457,7 @@ export default function Dashboard(props) {
                                 <Divider />
                                 <PatientDetailList
                                     title="LastPickupDateCal"
-                                    value={patientDetails.LastPickupDateCal}
+                                    value={patientDetails.Pharmacy_LastPickupdate}
                                 />
                                 <Divider />
                                 <PatientDetailList

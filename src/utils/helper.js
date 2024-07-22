@@ -54,6 +54,7 @@ export const eligiblePatients = (store, date) => {
     );
     if (daysOnART >= 180 && list.CurrentARTStatus_Pharmacy === "Active")
       return list;
+    return null;
   });
   return info;
 };
@@ -67,6 +68,7 @@ export const viralLoadDocumented = (store, date) => {
       true
     );
     if (ReffDate <= DateofCurrentViralLoad) return list;
+    return null;
   });
   return info;
 };
@@ -92,6 +94,7 @@ export const PatientDueForViralLoad = (store, date) => {
       maxSampleDateAllowed >= DateofLastSampleCollection
     )
       return list;
+    return null;
   });
   return info;
 };
@@ -120,6 +123,7 @@ export const missedAppointment = (
         moment(startDate, "DD/MM/YYYY", true).subtract(1, "day")
       )
         return list;
+    return null;
   });
   return info;
 };
@@ -127,6 +131,7 @@ export const missedAppointment = (
 export const suppressedVL = (store) => {
   const info = store.filter((list) => {
     if (parseInt(list.CurrentViralLoad) < 1000) return list;
+    return null;
   });
   return info;
 };

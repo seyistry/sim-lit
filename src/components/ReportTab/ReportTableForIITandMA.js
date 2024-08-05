@@ -26,13 +26,18 @@ export default function ReportTableForIITandMA(props) {
       editable: true,
     },
     {
-      field: "fullName",
-      headerName: "Full name",
-      description: "Firstname Surname",
-      sortable: true,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.Firstname || ""} ${params.row.Surname || ""}`,
+      field: "Surname",
+      headerName: "Surname",
+      width: 80,
+      editable: true,
+      type: "date",
+    },
+    {
+      field: "Firstname",
+      headerName: "Firstname",
+      width: 80,
+      editable: true,
+      type: "date",
     },
     {
       field: "Sex",

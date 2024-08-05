@@ -14,18 +14,6 @@ export default function ReportTableForIITandMA(props) {
   const columns = [
     { field: "PepID", headerName: "Pep ID", width: 120 },
     {
-      field: "State",
-      headerName: "State",
-      width: 120,
-      editable: true,
-    },
-    {
-      field: "FacilityName",
-      headerName: "Facility Name",
-      width: 120,
-      editable: true,
-    },
-    {
       field: "Surname",
       headerName: "Surname",
       width: 80,

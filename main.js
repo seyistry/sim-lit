@@ -1,15 +1,18 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow } = require("electron");
 
-function createWindow () {
+const path = require("path");
+
+function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
-    }
-  })
+      nodeIntegration: true,
+    },
+    icon: path.join(__dirname + "/public/favicon.ico"),
+  });
 
-  win.loadURL('http://localhost:3000')
+  win.loadURL("http://localhost:3000");
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
